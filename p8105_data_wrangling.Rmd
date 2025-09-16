@@ -1,0 +1,61 @@
+---
+title: "Data Import"
+output: html_document
+date: "2025-09-16"
+---
+
+```{r message=FALSE}
+library(tidyverse)
+```
+
+Let's import data!
+
+```{r}
+litters_df = read_csv("data/FAS_litters.csv")
+```
+
+Look at your data!
+
+```{r}
+names(litters_df)
+```
+
+Clean up names!
+
+```{r}
+litters_df = 
+  janitor::clean_names(litters_df)
+```
+
+Check the names!
+
+```{r}
+names(litters_df)
+```
+
+Try skimming with skimr! Wow!
+
+```{r}
+skimr::skim(litters_df)
+```
+
+## Fix the missing values
+
+```{r}
+litters_df = 
+  read_csv("data/FAS_litters.csv", 
+           na = c("NA", "", " "))
+```
+
+
+# Import Pups data
+
+```{r}
+pups_df =
+  read_csv("data/FAS_pups.csv",
+           skip = 3,
+           na = c("NA", "", " "))
+```
+
+
+
