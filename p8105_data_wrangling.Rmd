@@ -6,12 +6,15 @@ date: "2025-09-16"
 
 ```{r message=FALSE}
 library(tidyverse)
+library(readxl)
+library(haven)
 ```
 
 Let's import data!
 
 ```{r}
-litters_df = read_csv("data/FAS_litters.csv")
+litters_df = 
+  read_csv("data/FAS_litters.csv")
 ```
 
 Look at your data!
@@ -55,7 +58,63 @@ pups_df =
   read_csv("data/FAS_pups.csv",
            skip = 3,
            na = c("NA", "", " "))
+
+pups_df =
+  janitor::clean_names(pups_df)
+
+names(pups_df)
+head(pups_df)
 ```
+
+## What about excel?
+
+CSV's are great but sometimes you get Excel file. Blech!
+
+```{r}
+mlb_df =
+  read_excel("data/mlb11.xlsx")
+
+head(mlb_df)
+```
+
+Import LotR word counts!
+
+```{r}
+fotr_df =
+  read_excel("data/LotR_Words.xlsx",
+             range = "B3:D6")
+head(fotr_df)
+```
+
+Import the PULSE data (SAS file)
+
+```{r}
+pulse_df =
+  read_sas("data/public_pulse_data.sas7bdat")
+
+pulse_df =
+  janitor::clean_names(pulse_df)
+
+head(pulse_df)
+```
+
+## Note: Use read_csv() rather than read.csv()!
+
+## What about exporting?
+
+```{r}
+write_csv(fotr_df, "data/fotr_data.csv")
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
